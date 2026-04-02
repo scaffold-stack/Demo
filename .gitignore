@@ -1,0 +1,24 @@
+# Rust
+target/
+
+# Node
+node_modules/
+
+# Environment — never commit real keys
+.env
+.env.local
+.env.*.local
+
+# Clarinet devnet state
+contracts/.cache/
+contracts/.devnet/
+contracts/settings/Simnet.toml
+contracts/settings
+
+# Next.js build
+frontend/.next/
+frontend/out/
+
+# OS
+.DS_Store
+*.pem
