@@ -1,0 +1,21 @@
+{
+  "network": "testnet",
+  "deployed_at": "2026-04-03T08:07:06.019914+00:00",
+  "contracts": {
+    "token": {
+      "contract_id": "ST1G1J8TVYKX3FXNJ3BJ7MYNMQTKXWCGKREB77DXT.token",
+      "tx_id": "0xb1d903538a2ca031b0f7bdc3e06dae685af2f3aadff2560537fe3867742e1543",
+      "block_height": 0
+    },
+    "counter": {
+      "contract_id": "ST1G1J8TVYKX3FXNJ3BJ7MYNMQTKXWCGKREB77DXT.counter",
+      "tx_id": "0xefca141fca16485a70ab47ee864b8c6fb4398ae5a4a927854e980e33f0dbcd3c",
+      "block_height": 0
+    },
+    "nft": {
+      "contract_id": "ST1G1J8TVYKX3FXNJ3BJ7MYNMQTKXWCGKREB77DXT.nft",
+      "tx_id": "0xf0f3bafb45bfb3d19db4645a10defac87851d8076360b1146c7c1a2a05eb1251",
+      "block_height": 0
+    }
+  }
+}
