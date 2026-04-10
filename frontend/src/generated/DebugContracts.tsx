@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import { Cl } from '@stacks/transactions';
+import Message from '@/components/Message';
 
 
 
@@ -90,7 +91,7 @@ import { useNft_GetTokenUri } from './hooks';
 
 
 const S = {
-  page:        { padding: '24px', display: 'flex', flexDirection: 'column' as const, gap: '24px', minHeight: '100vh', alignItems: 'center'},
+  page:        { padding: '24px', display: 'flex', flexDirection: 'column' as const, gap: '24px', alignItems: 'center'},
   header:      { display: 'flex', alignItems: 'center', gap: '25px', paddingBottom: '16px', width: '428px' },
   headerDot:   { width: '8px', height: '8px', borderRadius: '50%', background: '#34d399' },
   headerTitle: { fontSize: '12px', fontWeight: 500, margin: 0, fontFamily: 'JetBrains Mono'  },
@@ -706,6 +707,7 @@ export default function DebugContracts() {
         )}
       </div>
       
+      <Message />
     </div>
   );
 }
