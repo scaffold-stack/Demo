@@ -94,36 +94,148 @@ const S = {
   header:      { display: 'flex', alignItems: 'center', gap: '25px', paddingBottom: '16px', width: '428px' },
   headerDot:   { width: '8px', height: '8px', borderRadius: '50%', background: '#34d399' },
   headerTitle: { fontSize: '12px', fontWeight: 500, margin: 0, fontFamily: 'JetBrains Mono'  },
-  tab:         { fontSize: '12px', fontWeight: 500, margin: 0, fontFamily: 'JetBrains Mono', background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', transition: 'color 0.15s ease' },
-  tabActive:   { color: '#F4F3EF' },
-  tabIdle:     { color: '#908E8E' },
+ tab: { 
+    fontSize: '12px', 
+    margin: 0, 
+    fontFamily: 'JetBrains Mono', 
+    background: 'transparent', 
+    border: '1px solid transparent', 
+    padding: 0, 
+    cursor: 'pointer', 
+    transition: 'all 0.15s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  tabActive: { 
+    background: '#434242', 
+    width: '135px', 
+    height: '40px', 
+    borderRadius: '25px', 
+    border: '1px solid #1F1E1F', 
+    color: '#F4F3EF',
+    lineHeight: '1',
+    fontWeight: 400 // font-mono usually maps to normal weight unless specified
+  },
+  tabIdle: { 
+    color: '#908E8E',
+    width: '135px', // Keep width consistent so tabs don't jump when switching
+    height: '40px'
+  },
+  tabHover: {
+    color: '#FFFFFF'
+  },
   headerTag:   { fontSize: '12px', color: '#6b7280', fontFamily: 'monospace', marginLeft: 'auto' },
-  panel:       { borderRadius: '12px', border: '1px solid #1f2937', overflow: 'hidden', width: '428px', alignItems: 'center', marginLeft: 'auto',marginRight: 'auto', display: 'flex',flexDirection: 'column'},
+ panel:       { borderRadius: '12px', border: '1px solid #1f2937', overflow: 'hidden', width: '428px', marginBottom: '12px' },
   panelBtn:    { width: '100%', textAlign: 'left' as const, padding: '16px 20px', background: '#1F1F1F', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', border: 'none' },
   panelBtnL:   { display: 'flex', alignItems: 'center' },
-  panelBar:    { width: '6px', height: '20px', borderRadius: '3px' },
+  panelBar:    { width: '6px', height: '20px', borderRadius: '3px', background: '#FF550E', marginRight: '12px' },
   panelName:   { fontWeight: 500, color: '#F4F3EF', fontSize: '14px', fontFamily: 'Instrument Sans'  },
   panelExt:    { fontSize: '12px', color: '#374151', fontFamily: 'monospace' },
-  panelGrid:   { padding: '20px', margin: '2px 2px' },
-  card:        { borderRadius: '8px', border: '1px solid rgba(31,41,55,0.8)', background: 'rgba(17,24,39,0.5)', padding: '16px', display: 'flex', flexDirection: 'column' as const, gap: '12px' },
-  cardHead:    { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
-  fnName:      { fontFamily: 'monospace', fontSize: '14px', fontWeight: 600, color: '#fff' },
-  badgeRead:   { fontSize: '11px', padding: '2px 8px', borderRadius: '999px', fontFamily: 'monospace', fontWeight: 500, border: '1px solid rgba(59,130,246,0.2)', background: 'rgba(59,130,246,0.1)', color: '#60a5fa' },
-  badgeWrite:  { fontSize: '11px', padding: '2px 8px', borderRadius: '999px', fontFamily: 'monospace', fontWeight: 500, border: '1px solid rgba(16,185,129,0.2)', background: 'rgba(16,185,129,0.1)', color: '#34d399' },
-  argLabel:    { fontSize: '11px', color: '#9ca3af', fontFamily: 'monospace', marginBottom: '3px' },
-  argType:     { fontSize: '10px', color: '#4b5563', fontFamily: 'monospace', marginLeft: '6px' },
-  argInput:    { width: '100%', borderRadius: '6px', background: 'rgba(31,41,55,0.8)', border: '1px solid #374151', padding: '6px 10px', fontSize: '13px', fontFamily: 'monospace', color: '#fff', outline: 'none', boxSizing: 'border-box' as const },
-  form:        { display: 'flex', flexDirection: 'column' as const, gap: '8px' },
-  btnRead:     { width: '100%', padding: '8px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, border: 'none', background: '#2563eb', color: '#fff', transition: 'all 0.15s' },
-  btnWrite:    { width: '100%', padding: '8px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, border: 'none', background: '#059669', color: '#fff', transition: 'all 0.15s' },
-  errBox:      { borderRadius: '8px', background: 'rgba(127,29,29,0.2)', border: '1px solid rgba(153,27,27,0.5)', padding: '8px 12px' },
-  errText:     { color: '#f87171', fontSize: '12px', fontFamily: 'monospace', margin: 0 },
-  resBox:      { borderRadius: '8px', background: 'rgba(31,41,55,0.6)', border: '1px solid rgba(55,65,81,0.5)', padding: '8px 12px' },
+  panelGrid:   { padding: '20px', width:'100%' },
   resLabel:    { fontSize: '11px', color: '#9ca3af', fontWeight: 600, textTransform: 'uppercase' as const, letterSpacing: '0.05em', marginBottom: '4px' },
-  resPre:      { fontSize: '12px', color: '#6ee7b7', overflowX: 'auto' as const, whiteSpace: 'pre-wrap' as const, wordBreak: 'break-word' as const, margin: 0 },
-  txBox:       { borderRadius: '8px', background: 'rgba(6,78,59,0.2)', border: '1px solid rgba(16,185,129,0.3)', padding: '8px 12px' },
+  resPre:      { fontSize: '12px', color: '#F4F3EF', overflowX: 'auto' as const, whiteSpace: 'pre-wrap' as const, wordBreak: 'break-word' as const, margin: 0 },
+  txBox:       { borderRadius: '8px', background: 'rgba(6,78,59,0.2)', border: '1px solid #2E2D2E', padding: '8px 12px' },
   txLabel:     { fontSize: '11px', color: '#34d399', fontWeight: 600, marginBottom: '4px' },
-  txHash:      { fontSize: '12px', color: '#6ee7b7', fontFamily: 'monospace', wordBreak: 'break-all' as const, margin: 0 },
+  txHash:      { fontSize: '12px', color: '#F4F3EF', fontFamily: 'monospace', wordBreak: 'break-all' as const, margin: 0 },
+  fnNumber:    { fontFamily: 'JetBrains Mono', fontSize: '12px', color: '#4B4B4B', marginRight: '12px' },
+  card:        { borderRadius: '12px', border: '1px solid #1F1E1F', background: '#1A1B1E', padding: '24px', display: 'flex', flexDirection: 'column' as const, transition: 'all 0.3s ease' },
+  formContainer: { overflow: 'hidden', transition: 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease' },
+  cardHead: { 
+    display: 'flex', 
+    alignItems: 'center', 
+    justifyContent: 'space-between',
+    marginBottom: '4px'
+  },
+  fnName: { 
+    fontFamily: 'Instrument Sans',
+    fontSize: '12px', 
+    fontWeight: 500, 
+    color: '#908E8E' 
+  },
+  badgeRead: { 
+    fontSize: '10px', 
+    padding: '4px 10px', 
+    borderRadius: '4px', 
+    fontFamily: 'JetBrains Mono', 
+    color: '#908E8E',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px'
+  },
+  badgeWrite: { 
+    fontSize: '10px', 
+    padding: '4px 10px', 
+    borderRadius: '4px', 
+    fontFamily: 'JetBrains Mono',  
+    color: '#908E8E',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px'
+  },
+  form: { display: 'flex', flexDirection: 'column' as const, gap: '16px' },
+  argLabel: { 
+    fontSize: '11px', 
+    color: '#908E8E', 
+    fontFamily: 'JetBrains Mono', 
+    marginBottom: '8px',
+    display: 'block' 
+  },
+  argType: { 
+    fontSize: '11px', 
+    color: '#4B4B4B', 
+    marginLeft: '8px' 
+  },
+  argInput: { 
+    width: '100%', 
+    borderRadius: '8px', 
+    background: '#131416', // Deep dark input
+    border: '1px solid #2C2C2C', 
+    padding: '12px 16px', 
+    fontSize: '14px', 
+    fontFamily: 'JetBrains Mono', 
+    color: '#FFFFFF', 
+    outline: 'none', 
+    boxSizing: 'border-box' as const 
+  },
+  btnRead: { 
+    width: '100%', 
+    padding: '12px', 
+    borderRadius: '8px', 
+    fontSize: '14px', 
+    fontWeight: 600, 
+    border: 'none', 
+    background: '#FF550E',
+    color: '#fff', 
+    fontFamily: 'Instrument Sans',
+    marginTop: '8px'
+  },
+  btnWrite: { 
+    width: '100%', 
+    padding: '12px', 
+    borderRadius: '8px', 
+    fontSize: '14px', 
+    fontWeight: 600, 
+    border: 'none', 
+    background: '#FF550E',
+    color: '#fff', 
+    fontFamily: 'Instrument Sans',
+    marginTop: '8px'
+  },
+  resBox: { 
+    marginTop: '12px',
+    borderRadius: '8px', 
+    background: '#131416', 
+    border: '1px solid #3B82F6', // Outline matches the action type
+    padding: '12px' 
+  },
+  badgeDot: { 
+    width: '6px', 
+    height: '6px', 
+    borderRadius: '50%', 
+    background: 'currentColor', 
+    marginRight: '6px' 
+  },
 } as const;
 
 // Convert a raw string value to the appropriate ClarityValue based on the type hint
@@ -145,45 +257,454 @@ function toClarityValue(value: string, typeHint: string): import('@stacks/transa
 
 export default function DebugContracts() {
   const [activeTab, setActiveTab] = useState<'write' | 'read'>('write');
+  const [hoveredTab, setHoveredTab] = useState<'write' | 'read' | null>(null);
+  // Initialize with the first contract name to drop it down on load
+  const [openContract, setOpenContract] = useState<string | null>("token");
+  const [openFunction, setOpenFunction] = useState<string | null>(null);
 
   return (
     <div style={S.page}>
       <div style={S.header}>
-        <button type="button" style={{ ...S.tab, ...(activeTab === 'write' ? S.tabActive : S.tabIdle) }} onClick={() => setActiveTab('write')}>
+        <button type="button" onMouseEnter={() => setHoveredTab('write')}
+          onMouseLeave={() => setHoveredTab(null)} style={Object.assign({}, S.tab, activeTab === 'write' ? S.tabActive : S.tabIdle, (hoveredTab === 'write' && activeTab !== 'write') ? S.tabHover : {})} onClick={() => setActiveTab('write')}>
           Write Contracts
         </button>
-        <button type="button" style={{ ...S.tab, ...(activeTab === 'read' ? S.tabActive : S.tabIdle) }} onClick={() => setActiveTab('read')}>
+        <button onMouseEnter={() => setHoveredTab('read')}
+          onMouseLeave={() => setHoveredTab(null)} type="button" style={Object.assign({}, S.tab, activeTab === 'read' ? S.tabActive : S.tabIdle, (hoveredTab === 'read' && activeTab !== 'read') ? S.tabHover : {})} onClick={() => setActiveTab('read')}>
           Read Contracts
         </button>
       </div>
+
       
-      <ContractPanel name="token">
-        {activeTab === 'write' && <FunctionCard_Token_Mint />}
-        {activeTab === 'write' && <FunctionCard_Token_SetTokenUri />}
-        {activeTab === 'write' && <FunctionCard_Token_Transfer />}
-        {activeTab === 'read' && <FunctionCard_Token_GetBalance />}
-        {activeTab === 'read' && <FunctionCard_Token_GetDecimals />}
-        {activeTab === 'read' && <FunctionCard_Token_GetName />}
-        {activeTab === 'read' && <FunctionCard_Token_GetSymbol />}
-        {activeTab === 'read' && <FunctionCard_Token_GetTokenUri />}
-        {activeTab === 'read' && <FunctionCard_Token_GetTotalSupply />}
-      </ContractPanel>
+      <div style={S.panel}>
+        <button 
+          style={S.panelBtn} 
+          onClick={() => {
+            setOpenContract(openContract === "token" ? null : "token");
+            setOpenFunction(null); // Close functions when switching contracts
+          }}
+        >
+          <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+            <div style={S.panelBar} />
+            <span style={S.panelName}>Token</span>
+            <span style={S.panelExt}>.clar</span>
+          </div>
+          <span style={S.headerTag}>{openContract === "token" ? '▲' : '▼'}</span>
+        </button>
+
+        {openContract === "token" && (
+          <div style={Object.assign({ padding: '20px', width:'100%' })} className='space-y-4'>
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Token_Mint 
+                    num="00"
+                    isOpen={openFunction === "token_mint"}
+                    onToggle={() => setOpenFunction(openFunction === "token_mint" ? null : "token_mint")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Token_SetTokenUri 
+                    num="01"
+                    isOpen={openFunction === "token_set-token-uri"}
+                    onToggle={() => setOpenFunction(openFunction === "token_set-token-uri" ? null : "token_set-token-uri")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Token_Transfer 
+                    num="02"
+                    isOpen={openFunction === "token_transfer"}
+                    onToggle={() => setOpenFunction(openFunction === "token_transfer" ? null : "token_transfer")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Token_GetBalance 
+      num="03"
+      isOpen={openFunction === "token_get-balance"}
+      onToggle={() => setOpenFunction(openFunction === "token_get-balance" ? null : "token_get-balance")}
+    />
+  )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Token_GetDecimals 
+      num="04"
+      isOpen={openFunction === "token_get-decimals"}
+      onToggle={() => setOpenFunction(openFunction === "token_get-decimals" ? null : "token_get-decimals")}
+    />
+  )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Token_GetName 
+      num="05"
+      isOpen={openFunction === "token_get-name"}
+      onToggle={() => setOpenFunction(openFunction === "token_get-name" ? null : "token_get-name")}
+    />
+  )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Token_GetSymbol 
+      num="06"
+      isOpen={openFunction === "token_get-symbol"}
+      onToggle={() => setOpenFunction(openFunction === "token_get-symbol" ? null : "token_get-symbol")}
+    />
+  )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Token_GetTokenUri 
+      num="07"
+      isOpen={openFunction === "token_get-token-uri"}
+      onToggle={() => setOpenFunction(openFunction === "token_get-token-uri" ? null : "token_get-token-uri")}
+    />
+  )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Token_GetTotalSupply 
+      num="08"
+      isOpen={openFunction === "token_get-total-supply"}
+      onToggle={() => setOpenFunction(openFunction === "token_get-total-supply" ? null : "token_get-total-supply")}
+    />
+  )}
+              
+            
+            
+          </div>
+        )}
+      </div>
       
-      <ContractPanel name="counter">
-        {activeTab === 'write' && <FunctionCard_Counter_Decrement />}
-        {activeTab === 'write' && <FunctionCard_Counter_Increment />}
-        {activeTab === 'write' && <FunctionCard_Counter_Reset />}
-        {activeTab === 'read' && <FunctionCard_Counter_GetCount />}
-      </ContractPanel>
+      <div style={S.panel}>
+        <button 
+          style={S.panelBtn} 
+          onClick={() => {
+            setOpenContract(openContract === "counter" ? null : "counter");
+            setOpenFunction(null); // Close functions when switching contracts
+          }}
+        >
+          <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+            <div style={S.panelBar} />
+            <span style={S.panelName}>Counter</span>
+            <span style={S.panelExt}>.clar</span>
+          </div>
+          <span style={S.headerTag}>{openContract === "counter" ? '▲' : '▼'}</span>
+        </button>
+
+        {openContract === "counter" && (
+          <div style={Object.assign({ padding: '20px', width:'100%' })} className='space-y-4'>
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Counter_Decrement 
+                    num="00"
+                    isOpen={openFunction === "counter_decrement"}
+                    onToggle={() => setOpenFunction(openFunction === "counter_decrement" ? null : "counter_decrement")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Counter_Increment 
+                    num="01"
+                    isOpen={openFunction === "counter_increment"}
+                    onToggle={() => setOpenFunction(openFunction === "counter_increment" ? null : "counter_increment")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Counter_Reset 
+                    num="02"
+                    isOpen={openFunction === "counter_reset"}
+                    onToggle={() => setOpenFunction(openFunction === "counter_reset" ? null : "counter_reset")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Counter_GetCount 
+      num="03"
+      isOpen={openFunction === "counter_get-count"}
+      onToggle={() => setOpenFunction(openFunction === "counter_get-count" ? null : "counter_get-count")}
+    />
+  )}
+              
+            
+            
+          </div>
+        )}
+      </div>
       
-      <ContractPanel name="nft">
-        {activeTab === 'write' && <FunctionCard_Nft_Mint />}
-        {activeTab === 'write' && <FunctionCard_Nft_SetBaseUri />}
-        {activeTab === 'write' && <FunctionCard_Nft_Transfer />}
-        {activeTab === 'read' && <FunctionCard_Nft_GetLastTokenId />}
-        {activeTab === 'read' && <FunctionCard_Nft_GetOwner />}
-        {activeTab === 'read' && <FunctionCard_Nft_GetTokenUri />}
-      </ContractPanel>
+      <div style={S.panel}>
+        <button 
+          style={S.panelBtn} 
+          onClick={() => {
+            setOpenContract(openContract === "nft" ? null : "nft");
+            setOpenFunction(null); // Close functions when switching contracts
+          }}
+        >
+          <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+            <div style={S.panelBar} />
+            <span style={S.panelName}>Nft</span>
+            <span style={S.panelExt}>.clar</span>
+          </div>
+          <span style={S.headerTag}>{openContract === "nft" ? '▲' : '▼'}</span>
+        </button>
+
+        {openContract === "nft" && (
+          <div style={Object.assign({ padding: '20px', width:'100%' })} className='space-y-4'>
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Nft_Mint 
+                    num="00"
+                    isOpen={openFunction === "nft_mint"}
+                    onToggle={() => setOpenFunction(openFunction === "nft_mint" ? null : "nft_mint")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Nft_SetBaseUri 
+                    num="01"
+                    isOpen={openFunction === "nft_set-base-uri"}
+                    onToggle={() => setOpenFunction(openFunction === "nft_set-base-uri" ? null : "nft_set-base-uri")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+                {activeTab === 'write' && (
+                  <FunctionCard_Nft_Transfer 
+                    num="02"
+                    isOpen={openFunction === "nft_transfer"}
+                    onToggle={() => setOpenFunction(openFunction === "nft_transfer" ? null : "nft_transfer")}
+                  />
+                )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Nft_GetLastTokenId 
+      num="03"
+      isOpen={openFunction === "nft_get-last-token-id"}
+      onToggle={() => setOpenFunction(openFunction === "nft_get-last-token-id" ? null : "nft_get-last-token-id")}
+    />
+  )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Nft_GetOwner 
+      num="04"
+      isOpen={openFunction === "nft_get-owner"}
+      onToggle={() => setOpenFunction(openFunction === "nft_get-owner" ? null : "nft_get-owner")}
+    />
+  )}
+              
+            
+            
+            
+              
+              
+
+
+  
+
+              
+              
+  {activeTab === 'read' && (
+    <FunctionCard_Nft_GetTokenUri 
+      num="05"
+      isOpen={openFunction === "nft_get-token-uri"}
+      onToggle={() => setOpenFunction(openFunction === "nft_get-token-uri" ? null : "nft_get-token-uri")}
+    />
+  )}
+              
+            
+            
+          </div>
+        )}
+      </div>
       
     </div>
   );
@@ -209,660 +730,428 @@ function ContractPanel({ name, children }: { name: string; children: React.React
 
 
 
-function FunctionCard_Token_Mint() {
-  const { data, loading, error, txid, call } = useToken_Mint();
+function FunctionCard_Token_Mint({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_Mint();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'amount': '',
-    'recipient': '',
-    
+    'amount': '', 'recipient': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['amount'] ?? '', 'uint128'),
-  
-  toClarityValue(args['recipient'] ?? '', 'principal'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>mint</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>MINT</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            amount<span style={S.argType}>uint128</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="amount"
-            value={args['amount']}
-            onChange={e => setArg('amount', e.target.value)}
-          />
-        </div>
-        
-        <div>
-          <div style={S.argLabel}>
-            recipient<span style={S.argType}>principal</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="recipient"
-            value={args['recipient']}
-            onChange={e => setArg('recipient', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['amount'] ?? '', 'uint128'),toClarityValue(args['recipient'] ?? '', 'principal'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>amount <span style={S.argType}>UINT128</span></label>
+              <input style={S.argInput} value={args['amount']} onChange={e => setArg('amount', e.target.value)} />
+            </div>
+            
+            <div>
+              <label style={S.argLabel}>recipient <span style={S.argType}>PRINCIPAL</span></label>
+              <input style={S.argInput} value={args['recipient']} onChange={e => setArg('recipient', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Token_SetTokenUri() {
-  const { data, loading, error, txid, call } = useToken_SetTokenUri();
+function FunctionCard_Token_SetTokenUri({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_SetTokenUri();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'value': '',
-    
+    'value': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['value'] ?? '', 'string-utf8'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>set-token-uri</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>SET-TOKEN-URI</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            value<span style={S.argType}>string-utf8</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="value"
-            value={args['value']}
-            onChange={e => setArg('value', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['value'] ?? '', 'string-utf8'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>value <span style={S.argType}>STRING-UTF8</span></label>
+              <input style={S.argInput} value={args['value']} onChange={e => setArg('value', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Token_Transfer() {
-  const { data, loading, error, txid, call } = useToken_Transfer();
+function FunctionCard_Token_Transfer({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_Transfer();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'amount': '',
-    'sender': '',
-    'recipient': '',
-    'memo': '',
-    
+    'amount': '', 'sender': '', 'recipient': '', 'memo': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['amount'] ?? '', 'uint128'),
-  
-  toClarityValue(args['sender'] ?? '', 'principal'),
-  
-  toClarityValue(args['recipient'] ?? '', 'principal'),
-  
-  toClarityValue(args['memo'] ?? '', 'optional'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>transfer</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>TRANSFER</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            amount<span style={S.argType}>uint128</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="amount"
-            value={args['amount']}
-            onChange={e => setArg('amount', e.target.value)}
-          />
-        </div>
-        
-        <div>
-          <div style={S.argLabel}>
-            sender<span style={S.argType}>principal</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="sender"
-            value={args['sender']}
-            onChange={e => setArg('sender', e.target.value)}
-          />
-        </div>
-        
-        <div>
-          <div style={S.argLabel}>
-            recipient<span style={S.argType}>principal</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="recipient"
-            value={args['recipient']}
-            onChange={e => setArg('recipient', e.target.value)}
-          />
-        </div>
-        
-        <div>
-          <div style={S.argLabel}>
-            memo<span style={S.argType}>optional</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="memo"
-            value={args['memo']}
-            onChange={e => setArg('memo', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['amount'] ?? '', 'uint128'),toClarityValue(args['sender'] ?? '', 'principal'),toClarityValue(args['recipient'] ?? '', 'principal'),toClarityValue(args['memo'] ?? '', 'optional'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>amount <span style={S.argType}>UINT128</span></label>
+              <input style={S.argInput} value={args['amount']} onChange={e => setArg('amount', e.target.value)} />
+            </div>
+            
+            <div>
+              <label style={S.argLabel}>sender <span style={S.argType}>PRINCIPAL</span></label>
+              <input style={S.argInput} value={args['sender']} onChange={e => setArg('sender', e.target.value)} />
+            </div>
+            
+            <div>
+              <label style={S.argLabel}>recipient <span style={S.argType}>PRINCIPAL</span></label>
+              <input style={S.argInput} value={args['recipient']} onChange={e => setArg('recipient', e.target.value)} />
+            </div>
+            
+            <div>
+              <label style={S.argLabel}>memo <span style={S.argType}>OPTIONAL</span></label>
+              <input style={S.argInput} value={args['memo']} onChange={e => setArg('memo', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Token_GetBalance() {
-  const { data, loading, error, txid, call } = useToken_GetBalance();
+function FunctionCard_Token_GetBalance({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_GetBalance();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'who': '',
-    
+    'who': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['who'] ?? '', 'principal'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-balance</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-BALANCE</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            who<span style={S.argType}>principal</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="who"
-            value={args['who']}
-            onChange={e => setArg('who', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['who'] ?? '', 'principal'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>who <span style={S.argType}>PRINCIPAL</span></label>
+              <input style={S.argInput} value={args['who']} onChange={e => setArg('who', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Token_GetDecimals() {
-  const { data, loading, error, txid, call } = useToken_GetDecimals();
+function FunctionCard_Token_GetDecimals({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_GetDecimals();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-decimals</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-DECIMALS</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Token_GetName() {
-  const { data, loading, error, txid, call } = useToken_GetName();
+function FunctionCard_Token_GetName({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_GetName();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-name</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-NAME</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Token_GetSymbol() {
-  const { data, loading, error, txid, call } = useToken_GetSymbol();
+function FunctionCard_Token_GetSymbol({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_GetSymbol();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-symbol</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-SYMBOL</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Token_GetTokenUri() {
-  const { data, loading, error, txid, call } = useToken_GetTokenUri();
+function FunctionCard_Token_GetTokenUri({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_GetTokenUri();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-token-uri</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-TOKEN-URI</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Token_GetTotalSupply() {
-  const { data, loading, error, txid, call } = useToken_GetTotalSupply();
+function FunctionCard_Token_GetTotalSupply({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useToken_GetTotalSupply();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-total-supply</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-TOTAL-SUPPLY</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
@@ -871,224 +1160,160 @@ const onSubmit = async (e: React.FormEvent) => {
 
 
 
-function FunctionCard_Counter_Decrement() {
-  const { data, loading, error, txid, call } = useCounter_Decrement();
+function FunctionCard_Counter_Decrement({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useCounter_Decrement();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>decrement</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>DECREMENT</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Counter_Increment() {
-  const { data, loading, error, txid, call } = useCounter_Increment();
+function FunctionCard_Counter_Increment({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useCounter_Increment();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>increment</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>INCREMENT</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Counter_Reset() {
-  const { data, loading, error, txid, call } = useCounter_Reset();
+function FunctionCard_Counter_Reset({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useCounter_Reset();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>reset</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>RESET</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Counter_GetCount() {
-  const { data, loading, error, txid, call } = useCounter_GetCount();
+function FunctionCard_Counter_GetCount({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useCounter_GetCount();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-count</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-COUNT</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
@@ -1097,488 +1322,313 @@ const onSubmit = async (e: React.FormEvent) => {
 
 
 
-function FunctionCard_Nft_Mint() {
-  const { data, loading, error, txid, call } = useNft_Mint();
+function FunctionCard_Nft_Mint({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useNft_Mint();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'recipient': '',
-    
+    'recipient': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['recipient'] ?? '', 'principal'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>mint</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>MINT</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            recipient<span style={S.argType}>principal</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="recipient"
-            value={args['recipient']}
-            onChange={e => setArg('recipient', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['recipient'] ?? '', 'principal'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>recipient <span style={S.argType}>PRINCIPAL</span></label>
+              <input style={S.argInput} value={args['recipient']} onChange={e => setArg('recipient', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Nft_SetBaseUri() {
-  const { data, loading, error, txid, call } = useNft_SetBaseUri();
+function FunctionCard_Nft_SetBaseUri({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useNft_SetBaseUri();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'value': '',
-    
+    'value': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['value'] ?? '', 'string-ascii'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>set-base-uri</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>SET-BASE-URI</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            value<span style={S.argType}>string-ascii</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="value"
-            value={args['value']}
-            onChange={e => setArg('value', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['value'] ?? '', 'string-ascii'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>value <span style={S.argType}>STRING-ASCII</span></label>
+              <input style={S.argInput} value={args['value']} onChange={e => setArg('value', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Nft_Transfer() {
-  const { data, loading, error, txid, call } = useNft_Transfer();
+function FunctionCard_Nft_Transfer({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useNft_Transfer();
   const isReadOnly = false;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'token-id': '',
-    'sender': '',
-    'recipient': '',
-    
+    'token-id': '', 'sender': '', 'recipient': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['token-id'] ?? '', 'uint128'),
-  
-  toClarityValue(args['sender'] ?? '', 'principal'),
-  
-  toClarityValue(args['recipient'] ?? '', 'principal'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>transfer</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>TRANSFER</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            token-id<span style={S.argType}>uint128</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="token-id"
-            value={args['token-id']}
-            onChange={e => setArg('token-id', e.target.value)}
-          />
-        </div>
-        
-        <div>
-          <div style={S.argLabel}>
-            sender<span style={S.argType}>principal</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="sender"
-            value={args['sender']}
-            onChange={e => setArg('sender', e.target.value)}
-          />
-        </div>
-        
-        <div>
-          <div style={S.argLabel}>
-            recipient<span style={S.argType}>principal</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="recipient"
-            value={args['recipient']}
-            onChange={e => setArg('recipient', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['token-id'] ?? '', 'uint128'),toClarityValue(args['sender'] ?? '', 'principal'),toClarityValue(args['recipient'] ?? '', 'principal'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>token-id <span style={S.argType}>UINT128</span></label>
+              <input style={S.argInput} value={args['token-id']} onChange={e => setArg('token-id', e.target.value)} />
+            </div>
+            
+            <div>
+              <label style={S.argLabel}>sender <span style={S.argType}>PRINCIPAL</span></label>
+              <input style={S.argInput} value={args['sender']} onChange={e => setArg('sender', e.target.value)} />
+            </div>
+            
+            <div>
+              <label style={S.argLabel}>recipient <span style={S.argType}>PRINCIPAL</span></label>
+              <input style={S.argInput} value={args['recipient']} onChange={e => setArg('recipient', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Nft_GetLastTokenId() {
-  const { data, loading, error, txid, call } = useNft_GetLastTokenId();
+function FunctionCard_Nft_GetLastTokenId({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useNft_GetLastTokenId();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
-
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-];
-  await call(clarityArgs);
-  };
 
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-last-token-id</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-LAST-TOKEN-ID</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([]); }}>
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Nft_GetOwner() {
-  const { data, loading, error, txid, call } = useNft_GetOwner();
+function FunctionCard_Nft_GetOwner({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useNft_GetOwner();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'token-id': '',
-    
+    'token-id': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['token-id'] ?? '', 'uint128'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-owner</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-OWNER</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            token-id<span style={S.argType}>uint128</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="token-id"
-            value={args['token-id']}
-            onChange={e => setArg('token-id', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['token-id'] ?? '', 'uint128'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>token-id <span style={S.argType}>UINT128</span></label>
+              <input style={S.argInput} value={args['token-id']} onChange={e => setArg('token-id', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
 
 
 
-function FunctionCard_Nft_GetTokenUri() {
-  const { data, loading, error, txid, call } = useNft_GetTokenUri();
+function FunctionCard_Nft_GetTokenUri({ num, isOpen, onToggle }: { num: string, isOpen: boolean, onToggle: () => void }) {
+  const { data, loading, call } = useNft_GetTokenUri();
   const isReadOnly = true;
 
-  // One state entry per argument, keyed by arg name
   
   const [args, setArgs] = useState<Record<string, string>>({
-    'token-id': '',
-    
+    'token-id': '', 
   });
   const setArg = (name: string, value: string) => setArgs(a => Object.assign({}, a, { [name]: value }));
   
 
-const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const clarityArgs: import('@stacks/transactions').ClarityValue[] = [
-  
-  
-  toClarityValue(args['token-id'] ?? '', 'uint128'),
-  
-  
-];
-  await call(clarityArgs);
-  };
-
   return (
-    <div style={S.card}>
-      <div style={S.cardHead}>
-        <span style={S.fnName}>get-token-uri</span>
-        <span style={isReadOnly ? S.badgeRead : S.badgeWrite}>
-          {isReadOnly ? '📖 read' : '✍️ write'}
-        </span>
+    <div style={Object.assign({}, S.card, { border: isOpen ? '1px solid #FF550E' : S.card.border })}>
+      <div style={Object.assign({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' })} onClick={onToggle}>
+        <div style={Object.assign({ display: 'flex', alignItems: 'center' })}>
+          <span style={S.fnNumber}>{num}</span>
+          <span style={S.fnName}>GET-TOKEN-URI</span>
+        </div>
+        <div style={isReadOnly ? S.badgeRead : S.badgeWrite}>
+          <div style={S.badgeDot} />
+          {isReadOnly ? 'READ' : 'WRITE'}
+          <span style={Object.assign({ marginLeft: '8px', transition: '0.3s' }, { transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' })}>▼</span>
+        </div>
       </div>
-      <form style={S.form} onSubmit={onSubmit}>
-        
-        
-        <div>
-          <div style={S.argLabel}>
-            token-id<span style={S.argType}>uint128</span>
-          </div>
-          <input
-            style={S.argInput}
-            placeholder="token-id"
-            value={args['token-id']}
-            onChange={e => setArg('token-id', e.target.value)}
-          />
-        </div>
-        
-        
-        <button
-          type="submit"
-          disabled={loading}
-          style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.4 : 1, cursor: loading ? 'not-allowed' : 'pointer' })}
-        >
-          {loading ? (isReadOnly ? 'Reading...' : 'Waiting for wallet...') : (isReadOnly ? 'Read' : 'Call')}
-        </button>
-      </form>
-      {error && (
-        <div style={S.errBox}>
-          <p style={S.errText}>{String(error.message)}</p>
-        </div>
-      )}
-      {txid && (
-        <div style={S.txBox}>
-          <p style={S.txLabel}>Transaction submitted</p>
-          <p style={S.txHash}>{txid}</p>
-        </div>
-      )}
-      {data !== null && data !== undefined && !txid && (
-        <div style={S.resBox}>
-          <p style={S.resLabel}>Result</p>
-          <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+
+      <div style={Object.assign({}, S.formContainer, { maxHeight: isOpen ? '1000px' : '0px', opacity: isOpen ? 1 : 0, marginTop: isOpen ? '20px' : '0px' })}>
+        <form style={S.form} onSubmit={async (e) => { e.preventDefault(); await call([toClarityValue(args['token-id'] ?? '', 'uint128'),]); }}>
+          
+            
+            <div>
+              <label style={S.argLabel}>token-id <span style={S.argType}>UINT128</span></label>
+              <input style={S.argInput} value={args['token-id']} onChange={e => setArg('token-id', e.target.value)} />
+            </div>
+            
+          
+          <button type="submit" disabled={loading} style={Object.assign({}, isReadOnly ? S.btnRead : S.btnWrite, { opacity: loading ? 0.5 : 1 })}>
+            {loading ? 'PROCESSING...' : (isReadOnly ? 'READ' : 'CALL')}
+          </button>
+          {!!data && (
+            <div style={Object.assign({}, S.resBox, { borderColor: isReadOnly ? '#2E2D2E' : '#2E2D2E' })}>
+              <p style={S.resLabel}>RESULT</p>
+              <pre style={S.resPre}>{JSON.stringify(data, null, 2)}</pre>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
+
 
 
