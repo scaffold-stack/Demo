@@ -31,10 +31,17 @@ function Header() {
       </div>
 
       <div className='flex items-center space-x-4 md:space-x-6'>
+      <a 
+            href="https://github.com/scaffold-stack/scaffold-stack" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="no-underline" 
+          >
         <div className='hidden sm:flex space-x-2 items-center justify-center cursor-pointer hover:opacity-80 transition-opacity'>
           <Image src={github} alt="github" width={20} height={20} />
           <h1 className='text-[14px] md:text-[16px] text-[#8F8D8E] font-instrument'>Github</h1>
         </div>
+        </a>
         <WalletConnect />
       </div>
     </header>
