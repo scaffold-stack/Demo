@@ -2,7 +2,7 @@
 
 A high-performance developer interface for building interacting with **Clarity** smart contracts on the Stacks blockchain. This project features a custom-generated debug UI for a Counter, Fungible Token (FT), and Non-Fungible Token (NFT) ecosystem.
 
-## 🚀 Contracts Included
+##  Contracts Included
 
 ### 1. Counter Contract (`counter.clar`)
 A simple state-management contract to demonstrate basic read/write functionality.
