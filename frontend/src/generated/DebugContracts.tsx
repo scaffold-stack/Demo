@@ -90,18 +90,21 @@ import { useNft_GetTokenUri } from './hooks';
 
 
 const S = {
-  page:        { padding: '24px', display: 'flex', flexDirection: 'column' as const, gap: '24px', minHeight: '100vh', background: '#030712' },
-  header:      { display: 'flex', alignItems: 'center', gap: '12px', paddingBottom: '16px', borderBottom: '1px solid #1f2937' },
+  page:        { padding: '24px', display: 'flex', flexDirection: 'column' as const, gap: '24px', minHeight: '100vh', alignItems: 'center'},
+  header:      { display: 'flex', alignItems: 'center', gap: '25px', paddingBottom: '16px', width: '428px' },
   headerDot:   { width: '8px', height: '8px', borderRadius: '50%', background: '#34d399' },
-  headerTitle: { fontSize: '20px', fontWeight: 700, color: '#fff', margin: 0 },
+  headerTitle: { fontSize: '12px', fontWeight: 500, margin: 0, fontFamily: 'JetBrains Mono'  },
+  tab:         { fontSize: '12px', fontWeight: 500, margin: 0, fontFamily: 'JetBrains Mono', background: 'transparent', border: 'none', padding: 0, cursor: 'pointer', transition: 'color 0.15s ease' },
+  tabActive:   { color: '#F4F3EF' },
+  tabIdle:     { color: '#908E8E' },
   headerTag:   { fontSize: '12px', color: '#6b7280', fontFamily: 'monospace', marginLeft: 'auto' },
-  panel:       { borderRadius: '12px', border: '1px solid #1f2937', overflow: 'hidden' },
-  panelBtn:    { width: '100%', textAlign: 'left' as const, padding: '16px 20px', background: 'rgba(17,24,39,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', border: 'none' },
-  panelBtnL:   { display: 'flex', alignItems: 'center', gap: '12px' },
-  panelBar:    { width: '6px', height: '20px', borderRadius: '3px', background: 'rgba(16,185,129,0.6)' },
-  panelName:   { fontFamily: 'monospace', fontWeight: 600, color: '#34d399', fontSize: '14px' },
+  panel:       { borderRadius: '12px', border: '1px solid #1f2937', overflow: 'hidden', width: '428px', alignItems: 'center', marginLeft: 'auto',marginRight: 'auto', display: 'flex',flexDirection: 'column'},
+  panelBtn:    { width: '100%', textAlign: 'left' as const, padding: '16px 20px', background: '#1F1F1F', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', border: 'none' },
+  panelBtnL:   { display: 'flex', alignItems: 'center' },
+  panelBar:    { width: '6px', height: '20px', borderRadius: '3px' },
+  panelName:   { fontWeight: 500, color: '#F4F3EF', fontSize: '14px', fontFamily: 'Instrument Sans'  },
   panelExt:    { fontSize: '12px', color: '#374151', fontFamily: 'monospace' },
-  panelGrid:   { padding: '20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px', background: 'rgba(3,7,18,0.6)' },
+  panelGrid:   { padding: '20px', margin: '2px 2px' },
   card:        { borderRadius: '8px', border: '1px solid rgba(31,41,55,0.8)', background: 'rgba(17,24,39,0.5)', padding: '16px', display: 'flex', flexDirection: 'column' as const, gap: '12px' },
   cardHead:    { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
   fnName:      { fontFamily: 'monospace', fontSize: '14px', fontWeight: 600, color: '#fff' },
@@ -141,100 +144,45 @@ function toClarityValue(value: string, typeHint: string): import('@stacks/transa
 
 
 export default function DebugContracts() {
+  const [activeTab, setActiveTab] = useState<'write' | 'read'>('write');
+
   return (
     <div style={S.page}>
       <div style={S.header}>
-        <div style={S.headerDot} />
-        <h2 style={S.headerTitle}>Debug Contracts</h2>
-        <span style={S.headerTag}>scaffold-stacks</span>
+        <button type="button" style={{ ...S.tab, ...(activeTab === 'write' ? S.tabActive : S.tabIdle) }} onClick={() => setActiveTab('write')}>
+          Write Contracts
+        </button>
+        <button type="button" style={{ ...S.tab, ...(activeTab === 'read' ? S.tabActive : S.tabIdle) }} onClick={() => setActiveTab('read')}>
+          Read Contracts
+        </button>
       </div>
       
       <ContractPanel name="token">
-        
-        
-        <FunctionCard_Token_Mint />
-        
-        
-        
-        <FunctionCard_Token_SetTokenUri />
-        
-        
-        
-        <FunctionCard_Token_Transfer />
-        
-        
-        
-        <FunctionCard_Token_GetBalance />
-        
-        
-        
-        <FunctionCard_Token_GetDecimals />
-        
-        
-        
-        <FunctionCard_Token_GetName />
-        
-        
-        
-        <FunctionCard_Token_GetSymbol />
-        
-        
-        
-        <FunctionCard_Token_GetTokenUri />
-        
-        
-        
-        <FunctionCard_Token_GetTotalSupply />
-        
-        
+        {activeTab === 'write' && <FunctionCard_Token_Mint />}
+        {activeTab === 'write' && <FunctionCard_Token_SetTokenUri />}
+        {activeTab === 'write' && <FunctionCard_Token_Transfer />}
+        {activeTab === 'read' && <FunctionCard_Token_GetBalance />}
+        {activeTab === 'read' && <FunctionCard_Token_GetDecimals />}
+        {activeTab === 'read' && <FunctionCard_Token_GetName />}
+        {activeTab === 'read' && <FunctionCard_Token_GetSymbol />}
+        {activeTab === 'read' && <FunctionCard_Token_GetTokenUri />}
+        {activeTab === 'read' && <FunctionCard_Token_GetTotalSupply />}
       </ContractPanel>
       
       <ContractPanel name="counter">
-        
-        
-        <FunctionCard_Counter_Decrement />
-        
-        
-        
-        <FunctionCard_Counter_Increment />
-        
-        
-        
-        <FunctionCard_Counter_Reset />
-        
-        
-        
-        <FunctionCard_Counter_GetCount />
-        
-        
+        {activeTab === 'write' && <FunctionCard_Counter_Decrement />}
+        {activeTab === 'write' && <FunctionCard_Counter_Increment />}
+        {activeTab === 'write' && <FunctionCard_Counter_Reset />}
+        {activeTab === 'read' && <FunctionCard_Counter_GetCount />}
       </ContractPanel>
       
       <ContractPanel name="nft">
-        
-        
-        <FunctionCard_Nft_Mint />
-        
-        
-        
-        <FunctionCard_Nft_SetBaseUri />
-        
-        
-        
-        <FunctionCard_Nft_Transfer />
-        
-        
-        
-        <FunctionCard_Nft_GetLastTokenId />
-        
-        
-        
-        <FunctionCard_Nft_GetOwner />
-        
-        
-        
-        <FunctionCard_Nft_GetTokenUri />
-        
-        
+        {activeTab === 'write' && <FunctionCard_Nft_Mint />}
+        {activeTab === 'write' && <FunctionCard_Nft_SetBaseUri />}
+        {activeTab === 'write' && <FunctionCard_Nft_Transfer />}
+        {activeTab === 'read' && <FunctionCard_Nft_GetLastTokenId />}
+        {activeTab === 'read' && <FunctionCard_Nft_GetOwner />}
+        {activeTab === 'read' && <FunctionCard_Nft_GetTokenUri />}
       </ContractPanel>
       
     </div>
@@ -253,7 +201,7 @@ function ContractPanel({ name, children }: { name: string; children: React.React
         </div>
         <span style={S.headerTag}>{open ? '▲' : '▼'}</span>
       </button>
-      {open && <div style={S.panelGrid}>{children}</div>}
+      {open && <div style={S.panelGrid} className='space-y-4'>{children}</div>}
     </div>
   );
 }
@@ -1632,6 +1580,5 @@ const onSubmit = async (e: React.FormEvent) => {
     </div>
   );
 }
-
 
 

@@ -2,8 +2,9 @@
 // Re-run `stacksdapp generate` to update.
 
 import { request } from '@stacks/connect';
-import { fetchCallReadOnlyFunction, cvToValue, Cl, ClarityValue } from '@stacks/transactions';
+import { fetchCallReadOnlyFunction, cvToValue, ClarityValue } from '@stacks/transactions';
 import { scaffoldConfig } from '../scaffold.config';
+import { callDevnetContract, getDevnetSenderAddress } from '../lib/devnet';
 
 let _deployments: Record<string, any> = { contracts: {} };
 try { _deployments = require('./deployments.json'); } catch {}
@@ -29,6 +30,14 @@ export async function token_mint(
 ): Promise<any> {
   const { address, contractName } = getContractId('token');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'mint',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -49,6 +58,14 @@ export async function token_setTokenUri(
 ): Promise<any> {
   const { address, contractName } = getContractId('token');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'set-token-uri',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -69,6 +86,14 @@ export async function token_transfer(
 ): Promise<any> {
   const { address, contractName } = getContractId('token');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'transfer',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -95,8 +120,8 @@ export async function token_getBalance(
     contractName,
     functionName: 'get-balance',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -115,8 +140,8 @@ export async function token_getDecimals(
     contractName,
     functionName: 'get-decimals',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -135,8 +160,8 @@ export async function token_getName(
     contractName,
     functionName: 'get-name',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -155,8 +180,8 @@ export async function token_getSymbol(
     contractName,
     functionName: 'get-symbol',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -175,8 +200,8 @@ export async function token_getTokenUri(
     contractName,
     functionName: 'get-token-uri',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -195,8 +220,8 @@ export async function token_getTotalSupply(
     contractName,
     functionName: 'get-total-supply',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -213,6 +238,14 @@ export async function counter_decrement(
 ): Promise<any> {
   const { address, contractName } = getContractId('counter');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'decrement',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -233,6 +266,14 @@ export async function counter_increment(
 ): Promise<any> {
   const { address, contractName } = getContractId('counter');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'increment',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -253,6 +294,14 @@ export async function counter_reset(
 ): Promise<any> {
   const { address, contractName } = getContractId('counter');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'reset',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -279,8 +328,8 @@ export async function counter_getCount(
     contractName,
     functionName: 'get-count',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -297,6 +346,14 @@ export async function nft_mint(
 ): Promise<any> {
   const { address, contractName } = getContractId('nft');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'mint',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -317,6 +374,14 @@ export async function nft_setBaseUri(
 ): Promise<any> {
   const { address, contractName } = getContractId('nft');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'set-base-uri',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -337,6 +402,14 @@ export async function nft_transfer(
 ): Promise<any> {
   const { address, contractName } = getContractId('nft');
   if (!address) return undefined;
+  if (scaffoldConfig.isDevnet) {
+    return callDevnetContract({
+      contract: `${address}.${contractName}`,
+      functionName: 'transfer',
+      functionArgs,
+      postConditions,
+    });
+  }
   // v8: request() accepts ClarityValue[] directly — no serialization needed
   return request('stx_callContract', {
     contract: `${address}.${contractName}`,
@@ -363,8 +436,8 @@ export async function nft_getLastTokenId(
     contractName,
     functionName: 'get-last-token-id',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -383,8 +456,8 @@ export async function nft_getOwner(
     contractName,
     functionName: 'get-owner',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
@@ -403,8 +476,8 @@ export async function nft_getTokenUri(
     contractName,
     functionName: 'get-token-uri',
     functionArgs,
-    network: scaffoldConfig.targetNetwork,
-    senderAddress: senderAddress ?? address,
+    network: scaffoldConfig.isDevnet ? 'devnet' : scaffoldConfig.targetNetwork,
+    senderAddress: senderAddress ?? getDevnetSenderAddress() ?? address,
   });
   return cvToValue(result);
 }
